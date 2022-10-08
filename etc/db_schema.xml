@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="achi_weatherapp_weather" resource="default" engine="innodb" comment="Achi Weather Table">
+        <column xsi:type="smallint" name="id" padding="6" unsigned="false" nullable="false" identity="true" comment="ID" />
+        <column xsi:type="varchar" name="city" nullable="false" length="25" comment="City" />
+        <column xsi:type="varchar" name="country" nullable="false" length="25" comment="Country" />
+        <column xsi:type="varchar" name="description" nullable="false" length="25" comment="Description" />
+        <column xsi:type="varchar" name="temperature" nullable="false" length="25" comment="Temperature" />
+        <column xsi:type="varchar" name="feels_like" nullable="false" length="25" comment="Feels like" />
+        <column xsi:type="varchar" name="pressure" nullable="false" length="25" comment="Pressure" />
+        <column xsi:type="varchar" name="humidity" nullable="false" length="25" comment="Humidity" />
+        <column xsi:type="varchar" name="wind_speed" nullable="false" length="25" comment="Wind Speed" />
+        <column xsi:type="varchar" name="sunrise" nullable="false" length="25" comment="Sunrise" />
+        <column xsi:type="varchar" name="sunset" nullable="false" length="25" comment="Sunset" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+</schema>

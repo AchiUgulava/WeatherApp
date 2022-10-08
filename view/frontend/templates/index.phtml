@@ -1,0 +1,41 @@
+ <h2>Weather</h2>
+ <div class="field name required">
+     <label class="label" for="name"><span><?php echo __('Location') ?></span></label>
+     <div class="control">
+         <input name="location" id="location" title="<?php echo __('Name') ?>" class="input-text" type="text" data-validate="{required:true}" />
+     </div>
+ </div>
+ <a href="javascript:void(0)" id="mc_get_dynamic_value" class="action submit primary">See Weather</a>
+
+ <script>
+     require(['jquery'], function($) {
+         $('#mc_get_dynamic_value').on('click', function(e) {
+             let api_controller_url = "<?=
+                                        /** @noEscape */
+                                        $block->getUrl('weatherapp/index/api') ?>";
+             let field_one = $("#location").val();
+             $.ajax({
+                 url: api_controller_url,
+                 //   "http://api.openweathermap.org/data/2.5/weather?q=" + field_one + "&units=metric" + "&appid=" + My_Id,
+                 type: 'GET',
+                 data: {
+                     field_one_v: field_one,
+                     format: 'json',
+                     form_key: window.FORM_KEY
+                 },
+                 dataType: 'json',
+                 success: function(data) {
+                     console.log(data);
+                     console.log(data.weather[0].main);
+                     console.log(data.main);
+                     console.log(data.main.temp);
+                     $("div[data-role='spinner']").hide();
+                     $("input[name='dynamic_value']").val(data).change();
+                 },
+                 error: function(request, error) {
+                     console.error('Dynamic Value Fetching Error!');
+                 }
+             });
+         });
+     });
+ </script>
