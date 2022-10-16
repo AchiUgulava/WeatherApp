@@ -108,7 +108,7 @@ class Index extends Template
         return null;
     }
 
-    public function getWeatheCollection()
+    public function getWeatherCollection()
     {
         return $this->WeatherCollectionFactory->create();
     }
