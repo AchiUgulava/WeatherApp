@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Achi\WeatherApp\Api\Data\WeatherInterface" type="Achi\WeatherApp\Model\Data\Weather"/>
-    <virtualType name="Achi\WeatherApp\Model\ResourceModel\Weather\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
-        <arguments>
-            <argument name="mainTable" xsi:type="string">achi_weatherapp_weather</argument>
-            <argument name="resourceModel" xsi:type="string">Achi\WeatherApp\Model\ResourceModel\Weather</argument>
-        </arguments>
-    </virtualType>
-    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
-        <arguments>
-            <argument name="collections" xsi:type="array">
-                <item name="achi_weatherapp_weather_listing_data_source" xsi:type="string">Achi\WeatherApp\Model\ResourceModel\Weather\Grid\Collection</item>
-            </argument>
-        </arguments>
-    </type>
+    <preference for="Achi\WeatherApp\Api\Data\WeatherInterface" type="Achi\WeatherApp\Model\Weather"/>
+    <preference for="Achi\WeatherApp\Api\WeatherRepositoryInterface" type="Achi\WeatherApp\Model\WeatherRepository" />
+<!--    <virtualType name="Achi\WeatherApp\Model\ResourceModel\Weather\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">-->
+<!--        <arguments>-->
+<!--            <argument name="mainTable" xsi:type="string">achi_weatherapp_weather</argument>-->
+<!--            <argument name="resourceModel" xsi:type="string">Achi\WeatherApp\Model\ResourceModel\Weather</argument>-->
+<!--        </arguments>-->
+<!--    </virtualType>-->
+<!--    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">-->
+<!--        <arguments>-->
+<!--            <argument name="collections" xsi:type="array">-->
+<!--                <item name="achi_weatherapp_weather_listing_data_source" xsi:type="string">Achi\WeatherApp\Model\ResourceModel\Weather\Grid\Collection</item>-->
+<!--            </argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
 </config>

@@ -1,8 +1,9 @@
 <?php
 
 namespace Achi\WeatherApp\Api\Data;
-
-interface WeatherInterface
+use Magento\Framework\Api\ExtensibleDataInterface;
+ 
+interface WeatherInterface extends ExtensibleDataInterface
 {
     /**
      * String constants for property names
@@ -19,162 +20,117 @@ interface WeatherInterface
     const SUNSET = "sunset";
 
     /**
-     * Getter for City.
-     *
-     * @return int|null
+     * @return mixed
      */
-    public function getCity(): ?int;
+    public function getId();
 
     /**
-     * Setter for City.
-     *
-     * @param int|null $city
-     *
-     * @return void
+     * @param string $city
+     * @return mixed
      */
-    public function setCity(?int $city): void;
+    public function setCity(string $city);
 
     /**
-     * Getter for Country.
-     *
-     * @return string|null
+     * @return mixed
      */
-    public function getCountry(): ?string;
+    public function getCity();
 
     /**
-     * Setter for Country.
-     *
-     * @param string|null $country
-     *
-     * @return void
+     * @param string $country
+     * @return mixed
      */
-    public function setCountry(?string $country): void;
+    public function setCountry(string $country);
 
     /**
-     * Getter for Description.
-     *
-     * @return string|null
+     * @return mixed
      */
-    public function getDescription(): ?string;
+    public function getCountry();
 
     /**
-     * Setter for Description.
-     *
-     * @param string|null $description
-     *
-     * @return void
+     * @param string $description
+     * @return mixed
      */
-    public function setDescription(?string $description): void;
+    public function setDescription(string $description);
 
     /**
-     * Getter for Temperature.
-     *
-     * @return string|null
+     * @return mixed
      */
-    public function getTemperature(): ?string;
+    public function getDescription();
 
     /**
-     * Setter for Temperature.
-     *
-     * @param string|null $temperature
-     *
-     * @return void
+     * @param float $temperature
+     * @return mixed
      */
-    public function setTemperature(?string $temperature): void;
+    public function setTemperature(float $temperature);
 
     /**
-     * Getter for FeelsLike.
-     *
-     * @return string|null
+     * @return mixed
      */
-    public function getFeelsLike(): ?string;
+    public function getTemperature();
 
     /**
-     * Setter for FeelsLike.
-     *
-     * @param string|null $feelsLike
-     *
-     * @return void
+     * @param int $feelsLike
+     * @return mixed
      */
-    public function setFeelsLike(?string $feelsLike): void;
+    public function setFeelsLike(int $feelsLike);
 
     /**
-     * Getter for Pressure.
-     *
-     * @return string|null
+     * @return mixed
      */
-    public function getPressure(): ?string;
+    public function getFeelsLike();
 
     /**
-     * Setter for Pressure.
-     *
-     * @param string|null $pressure
-     *
-     * @return void
+     * @param int $pressure
+     * @return mixed
      */
-    public function setPressure(?string $pressure): void;
+    public function setPressure(int $pressure);
 
     /**
-     * Getter for Humidity.
-     *
-     * @return string|null
+     * @return int
      */
-    public function getHumidity(): ?string;
+    public function getPressure();
 
     /**
-     * Setter for Humidity.
-     *
-     * @param string|null $humidity
-     *
-     * @return void
+     * @param int $humidity
+     * @return mixed
      */
-    public function setHumidity(?string $humidity): void;
+    public function setHumidity(int $humidity);
 
     /**
-     * Getter for WindSpeed.
-     *
-     * @return string|null
+     * @return mixed
      */
-    public function getWindSpeed(): ?string;
+    public function getHumidity();
 
     /**
-     * Setter for WindSpeed.
-     *
-     * @param string|null $windSpeed
-     *
-     * @return void
+     * @param float $windSpeed
+     * @return mixed
      */
-    public function setWindSpeed(?string $windSpeed): void;
+    public function setWindSpeed(float $windSpeed);
 
     /**
-     * Getter for Sunrise.
-     *
-     * @return string|null
+     * @return mixed
      */
-    public function getSunrise(): ?string;
+    public function getWindSpeed();
 
     /**
-     * Setter for Sunrise.
-     *
-     * @param string|null $sunrise
-     *
-     * @return void
+     * @param string $sunrise
+     * @return mixed
      */
-    public function setSunrise(?string $sunrise): void;
+    public function setSunrise(string $sunrise);
 
     /**
-     * Getter for Sunset.
-     *
-     * @return string|null
+     * @return mixed
      */
-    public function getSunset(): ?string;
+    public function getSunrise();
 
     /**
-     * Setter for Sunset.
-     *
-     * @param string|null $sunset
-     *
-     * @return void
+     * @param string $sunset
+     * @return mixed
      */
-    public function setSunset(?string $sunset): void;
+    public function setSunset(string $sunset);
+
+    /**
+     * @return mixed
+     */
+    public function getSunset();
 }

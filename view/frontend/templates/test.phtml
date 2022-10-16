@@ -1,78 +1,144 @@
 <h2>Weather</h2>
- <div class="field name required">
-     <label class="label" for="name"><span><?php echo __('Location') ?></span></label>
-     <div class="control">
-         <input name="location" id="location" title="<?php echo __('Name') ?>" class="input-text" type="text" data-validate="{required:true}" />
-     </div>
- </div>
- <a href="javascript:void(0)" id="mc_get_dynamic_value" class="action submit primary">See Weather</a>
- <table>
+<!-- <div class="field name required">
+    <label class="label" for="name"><span></span></label>
+    <div class="control">
+        <input name="location" id="location" title="" class="input-text" type="text" data-validate="{required:true}" />
+    </div>
+</div>
+ -->
+<label for="city" ><?php echo __('Location') ?></label>
+<br>
+<input type="text" id="city" name="city" title="<?php echo __('City Name') ?>">
+<br>
+<br>
+<a href="javascript:void(0)" id="mc_get_dynamic_value" class="action submit primary">See Weather</a>
+
+<div>
+
+    <!-- LOCATION -->
+    <div class="row text-center">
+        <div class="col-lg-12">
+            <h1 class="city"></h1>
+            <h4 class="country"></h4>
+        </div>
+    </div>
+    <!-- DATA AREA -->
+    <div>
+    <h4 class="description"></h4>    
+    <h4 class="temp"></h4>
+    <h4 class="feels-like"></h4>
+    <h4 class="pressure"></h4>
+    <h4 class="humidity"></h4>
+    <h4 class="wind-speed"></h4>
+    <h4 class="sunrise"></h4>
+    <h4 class="sunset"></h4>
+    </div>
+        
+</div>
+
+<table>
     <tr>
-        <th><?= __('City'); ?></th>
-        <th><?= __('Country'); ?></th>
-        <th><?= __('Description'); ?></th>
-        <th><?= __('Temperature'); ?></th>
-        <th><?= __('Feels like'); ?></th>
-        <th><?= __('Pressure'); ?></th>
-        <th><?= __('Humidity'); ?></th>
-        <th><?= __('Wind Speed'); ?></th>
-        <th><?= __('Sunrise'); ?></th>
-        <th><?= __('Sunset'); ?></th>
-        <th colspan="2"><?= __('Action'); ?></th>
+        <th><?= __('City') ?></th>
+        <th><?= __('Country') ?></th>
+        <th><?= __('Description') ?></th>
+        <th><?= __('Temperature') ?></th>
+        <th><?= __('Feels like') ?></th>
+        <th><?= __('Pressure') ?></th>
+        <th><?= __('Humidity') ?></th>
+        <th><?= __('Wind Speed') ?></th>
+        <th><?= __('Sunrise') ?></th>
+        <th><?= __('Sunset') ?></th>
+        <th colspan="2"><?= __('Action') ?></th>
     </tr>
     <?php
-        $collectionData = $block->data();
-        foreach($collectionData as $collection):
+    $collectionData = $block->getWeatheCollection();
+    foreach ($collectionData as $collection) :
     ?>
-    <tr>
-        <td><?= $collection->getCity(); ?></td>
-        <td><?= $collection->getCountry(); ?></td>
-        <td><?= $collection->getDescription(); ?></td>
-        <td><?= $collection->getTemperature(); ?></td>
-        <td><?= $collection->getFeelsLike(); ?></td>
-        <td><?= $collection->getPressure(); ?></td>
-        <td><?= $collection->getHumidity(); ?></td>
-        <td><?= $collection->getWindSpeed(); ?></td>
-        <td><?= $collection->getSunrise(); ?></td>
-        <td><?= $collection->getSunset(); ?></td>
-        <td>
-            <a href="<?= $block->getUrl('weatherapp/index').'id/'.$collection->getId(); ?>" class="action primary">Edit</a>
-        </td>
-        <td>
-            <a href="<?= $block->getUrl('weatherapp/index').'?id='.$collection->getId(); ?>" class="action primary">Delete</a>
-        </td>
-    </tr>
+        <tr>
+            <td><?= $collection->getCity(); ?></td>
+            <td><?= $collection->getCountry(); ?></td>
+            <td><?= $collection->getDescription(); ?></td>
+            <td><?= $collection->getTemperature(); ?></td>
+            <td><?= $collection->getFeelsLike(); ?></td>
+            <td><?= $collection->getPressure(); ?></td>
+            <td><?= $collection->getHumidity(); ?></td>
+            <td><?= $collection->getWindSpeed(); ?></td>
+            <td><?= $collection->getSunrise(); ?></td>
+            <td><?= $collection->getSunset(); ?></td>
+            <td>
+            </td>
+        </tr>
     <?php endforeach; ?>
 </table>
- <script>
-     require(['jquery'], function($) {
-         $('#mc_get_dynamic_value').on('click', function(e) {
-             let api_controller_url = "<?=
-                                        /** @noEscape */
-                                        $block->getUrl('weatherapp/index/api') ?>";
-             let field_one = $("#location").val();
-             $.ajax({
+<script>
+    require(['jquery'], function($) {
+        $('#mc_get_dynamic_value').on('click', function(e) {
+            let field_one = $("#city").val();
+            let API = "http://api.openweathermap.org/data/2.5/weather?q=" + field_one + "&units=metric" + "&appid=8d0bef5c6d7e4ac1577361232d0a4bc0";
+            let dt = '';
+            let api_controller_url = "<?=/** @noEscape */ $block->getUrl('weatherapp/index/curlhandler') ?>";
+            console.log(field_one, api_controller_url);
+            // $.ajax({
+            //     url: api_controller_url.toString(),
+            //     type: 'GET',
+            //     data: {
+            //         field_one_v: field_one,
+            //         format: 'json',
+            //         form_key: window.FORM_KEY
+            //     },
+            //     success: function(data) {
+            //         console.log(data);
+
+            //         $("div[data-role='spinner']").hide();
+            //         $("input[name='dynamic_value']").val(data).change();
+            //     },
+            //     error: function(request, error) {
+            //         console.log(request);
+            //     }
+            // });
+            fetch(API)
+            // when we get response from server
+            .then(response => {
+                // return respon as json
+                return response.json();
+            })
+            .then(data => {
+                dt=data;
+                // log the data
+                console.log(dt);
+                // set the data
+                $('.city').text(data.name );
+                $('.country').text('Country: ' + data.sys.country );
+                $('.description').text('Description: ' + data.weather.description);
+                $('.temp').text('Temperature: ' +  data.main.temp + " ℃");
+                $('.feels-like').text('Feels like: ' + data.main.feels_like + " ℃" );
+                $('.pressure').text('Pressure: ' + data.main.pressure );
+                $('.humidity').text('Humidity: ' + data.main.humidity );
+                $('.wind-speed').text('Wind speed: ' + data.wind.speed );
+                $('.sunrise').text('Sunrise: ' + data.sys.sunrise );
+                $('.sunset').text('Sunset: ' + data.sys.sunset );
+                $("div[data-role='spinner']").hide();
+                     $("input[name='dynamic_value']").val(data).change();
+                $.ajax({
                  url: api_controller_url,
-                 //   "http://api.openweathermap.org/data/2.5/weather?q=" + field_one + "&units=metric" + "&appid=" + My_Id,
-                 type: 'GET',
+                 type: 'POST',
                  data: {
-                     field_one_v: field_one,
-                     format: 'json',
-                     form_key: window.FORM_KEY
-                 },
+                    weather_data:dt,
+                    format: 'json',
+                },
                  dataType: 'json',
                  success: function(data) {
                      console.log(data);
-                     console.log(data.weather[0].main);
-                     console.log(data.main);
-                     console.log(data.main.temp);
-                     $("div[data-role='spinner']").hide();
-                     $("input[name='dynamic_value']").val(data).change();
+                     
                  },
                  error: function(request, error) {
                      console.error('Dynamic Value Fetching Error!');
+                     console.log(request.responseText);
                  }
              });
-         });
-     });
- </script>
+            
+            });
+    
+        });
+    });
+</script>
